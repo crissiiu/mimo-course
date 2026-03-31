@@ -1,6 +1,6 @@
-package arrays.e27_remove_element;
+package e27_remove_element;
 
-public class E27RemoveElement {
+public class Main {
     public static void main(String[] args) {
         int[] nums = {0,1,2,2,3,0,4,2};
         int val = 2;
