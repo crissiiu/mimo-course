@@ -1,4 +1,4 @@
-package linked_list;
+package linked_list.m146_LRU_cache;
 
 import java.util.HashMap;
 
