@@ -52,8 +52,14 @@ export class AuthServiceService implements OnModuleInit {
     this.kafkaClient.emit(KAFKA_TOPICS.USER_REGISTERED, {
       userId: user.id,
       email: user.email,
-      timstamp: new Date().toISOString(),
+      timestamp: new Date().toISOString(),
     });
+
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    };
   }
 
   async login(email: string, password: string) {
@@ -63,8 +69,12 @@ export class AuthServiceService implements OnModuleInit {
       .where(eq(users.email, email))
       .limit(1);
 
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!user || !isMatch) {
+    if (!isMatch) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
