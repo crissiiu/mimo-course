@@ -42,7 +42,8 @@ export class AppController {
     } catch (error) {
       if (error instanceof HttpException) throw error;
       throw new HttpException(
-        error.message || 'Internal Server Error connecting to Auth Service',
+        (error as Error).message ||
+          'Internal Server Error connecting to Auth Service',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -72,7 +73,8 @@ export class AppController {
     } catch (error) {
       if (error instanceof HttpException) throw error;
       throw new HttpException(
-        error.message || 'Internal Server Error connecting to Auth Service',
+        (error as Error).message ||
+          'Internal Server Error connecting to Auth Service',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
