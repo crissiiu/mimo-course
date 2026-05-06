@@ -10,5 +10,11 @@ export * from './interfaces';
 //Utils
 export * from './utils';
 
+//Decorators
+export * from './decorators';
+
+//Guards
+export * from './guards';
+
 //DTOs
 export * from './dto';
