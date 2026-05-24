@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Sieu Nguyen Thanh">
+    <meta name="description" content="This page contains all the things I am learning how to create as I learn HTML.">
+    <title>My first website page</title>
+    <link rel="icon" href="pig.png" type="image/x-icon">
+    <link rel="stylesheet" href="main.css" type="text/css">
+
+</head>
+
+<body>
+    <Header>
+        <h1>Hello world</h1>
+
+        <nav aria-label="primary-navigation">
+            <ul>
+                <li>
+                    <a href="#html">Learn HTMl</a>
+                </li>
+                <li>
+                    <a href="#vacation">Planning a Vacation</a>
+                </li>
+            </ul>
+        </nav>
+    </Header>
+
+    <hr>
+    <main>
+        <article id="html">
+            <h2>I'm ready to learn HTML</h2>
+            <p>This is my first website</p>
+            <section>
+                <h3>HTML 5</h3>
+                <img src="imgs/pig1.png" alt="Pig Face" title="Pig Face" width="300" height="300">
+                <h3> My Daily Schedule</h3>
+                <p>Let me tell you how:</p>
+                <ol>
+                    <li>&nbsp;&nbsp;&nbsp;....I learn more about web dev.
+                        <figure>
+                            <img src="imgs/pig2.png" alt="Pig Face" title="Pig Face" width="300" height="300"
+                                loading="lazy">
+                            <figcaption>
+                                Image 1. <em>Pig</em>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li>&nbsp;&nbsp;&nbsp;....I plant out my schdule</li>
+                    <li>&nbsp;&nbsp;&nbsp;....I use resources from <abbr title="Mozilla Developer">MDN</abbr></li>
+                </ol>
+
+            </section>
+            <section>
+                <ul>
+                    <li>&nbsp;&nbsp;&nbsp;....I learn more about web dev.</li>
+                    <li>&nbsp;&nbsp;&nbsp;....I plant out my schdule</li>
+                    <li>&nbsp;&nbsp;&nbsp;....I use resources from <abbr title="Mozilla Developer"><a
+                                href="https://www.flaticon.com/search?word=pig" style="color: white;">MDN</a></abbr>
+                    </li>
+                </ul>
+                <aside>
+                    <details>
+                        <summary>
+                            Guess <mark>the number of hours </mark>I code per day
+                        </summary>
+                        <p>
+                            I start at <time datetime="08:00">8 am</time> and I write code for <time datetime="PT3H">3
+                                hours</time> every morning.
+                        </p>
+                    </details>
+                </aside>
+
+                <br>
+
+                <table>
+                    <caption>My Daily Schedule</caption>
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Activity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Morning</th>
+                            <td>
+                                <time datetime="08:00">8 am</time> ~
+                                <time datetime="14:00">2 pm</time>
+                            </td>
+                            <td>Write Code</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Afternoon</th>
+                            <td>
+                                <time datetime="08:00">8 am</time> ~
+                                <time datetime="11:00">11 am</time>
+                            </td>
+                            <td>Eat Lunch</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Afternoon</th>
+                            <td>
+                                <time datetime="12:00">12 pm</time> ~
+                                <time datetime="15:00">3 pm</time>
+                            </td>
+                            <td>Study</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Evening</th>
+                            <td colspan="2">Free time</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Night</th>
+                            <td rowspan="2">
+                                <time datetime="18:00">6 pm</time> ~
+                                <time datetime="22:00">10 pm</time>
+                            </td>
+                            <td>Sleep</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Late Night</th>
+                            <td>Sleep</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">Total: 8 hours</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+        </article>
+
+        <hr>
+
+        <article id="vacation">
+
+            <h2>I'm also planning a vacation.</h2>
+            <p>I've been working hard and <em>really need a gateway</em>.</p>
+
+            <h3>Place I want to avoid</h3>
+            <dl>
+                <dt>North Pole</dt>
+                <dd>
+                    I hear this is <strong>cold</strong>!
+                </dd>
+                <dt>South Pole</dt>
+                <dd>This is a also cold</dd>
+            </dl>
+
+        </article>
+
+        <hr>
+
+        <article id="contact">
+            <h2>Contact me</h2>
+            <p>Feel free to contact me via email or phone</p>
+            <form action="https://facebook.com" method="get">
+                <fieldset>
+                    <legend>Contact Information</legend>
+
+                    <p>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter Your Email">
+                    </p>
+                    <p>
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="555-555-5555"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="on" required autofocus>
+
+                        <br>
+                    </p>
+                    <p>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter Your Password"
+                            autocomplete="on" required autofocus>
+
+                        <br>
+                    </p>
+                    <p>
+                        <label for="favorite-decade">Favorite Decade:</label>
+                        <input type="number" id="favorite-decade" name="favorite-decade"
+                            placeholder="Enter Your Favorite Decade" min="1950" max="2020" step="10" value="1980"
+                            required autofocus>
+
+                        <br>
+                    </p>
+
+                    <p>
+                        <label for="favorite-coffee">Favorite Coffee:</label>
+                        <select name="coffee" id="favorite-coffee" multiple size="5">
+                            <optgroup label="Coffees">
+                                <option value="1">Espresso</option>
+                                <option value="2">Latte</option>
+                            </optgroup>
+                            <optgroup label="Teas">
+                                <option value="6">Green Tea</option>
+                                <option value="7">Black Tea</option>
+                            </optgroup>
+                            <option value="8">Other</option>
+                        </select>
+
+                        <br>
+                    </p>
+                    <p>
+                        <label for="favorite-coffee">Favorite Coffee:</label>
+                        <input type="text" name="favorite-coffee" id="favorite-coffee"
+                            placeholder="Enter Your Favorite Coffee" list="coffee-list">
+                        <datalist id="coffee-list">
+                            <option value="Espresso">
+                            <option value="Latte">
+                            <option value="Green Tea">
+                            <option value="Black Tea">
+                        </datalist>
+                        <br>
+                    </p>
+                    <button type="submit">Submit</button>
+                </fieldset>
+
+                <br>
+
+                <fieldset>
+                    <legend>
+                        What is your favorite decade?
+                    </legend>
+                    <p>
+                        <label for="favorite-decade-1">1950s</label>
+                        <input type="radio" id="favorite-decade-1" name="favorite-decade" value="1950s">
+                        <br>
+                    </p>
+                    <p>
+                        <label for="favorite-decade-2">1960s</label>
+                        <input type="radio" id="favorite-decade-2" name="favorite-decade" value="1960s" checked>
+                        <br>
+                    </p>
+                    <p>
+                        <label for="favorite-decade-3">1970s</label>
+                        <input type="radio" id="favorite-decade-3" name="favorite-decade" value="1970s">
+                        <br>
+                    </p>
+                </fieldset>
+
+                <br>
+
+                <fieldset>
+                    <legend>
+                        Do you have a pet?
+                    </legend>
+                    <p>
+                        <label for="pet-1">Dog</label>
+                        <input type="checkbox" id="pet-1" name="pet" value="dog">
+                        <br>
+                    </p>
+                    <p>
+                        <label for="pet-2">Cat</label>
+                        <input type="checkbox" id="pet-2" name="pet" value="cat">
+                        <br>
+                    </p>
+                </fieldset>
+
+                <br>
+
+                <fieldset>
+                    <legend>
+                        Send me a messageS
+                    </legend>
+                    <p>
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" placeholder="Enter Your Message Here" rows="5"
+                            cols="30"></textarea>
+                        <br>
+                </fieldset>
+            </form>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        &lt;&lt;&lt;<a href="about.html">Sieu Nguyen Thanh</a>&copy;&gt;&gt;&gt;
+        <address>
+            <br>Doi 3, Van Hoi 2, Van Duc, Binh Dinh
+        </address>
+    </footer>
+</body>
+
+</html>
