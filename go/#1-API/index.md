@@ -32,3 +32,5 @@ Client          Server
 - 500: Internal server error - Lỗi server
 - 503: Server Available - Server tạm thời không hoạt động
 
+# 4. JSON
+- JavaScript Object Notation - định dạng dữ liệu nhẹ, dễ đọc. JSon sử dụng cặp key-value và có cấu trúc như ọbject hoặc array
