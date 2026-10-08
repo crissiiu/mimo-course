@@ -128,3 +128,87 @@ Các hàm này giống cách dùng của fmt, nhưng mặc định thêm ngày g
 |---|---|
 | `log.Fatal(...)` | Ghi log rồi kết thúc chương trình bằng `os.Exit(1)`; các hàm `defer` không chạy |
 | `log.Panic(...)` | Ghi log rồi gọi `panic`; các hàm `defer` chạy khi tháo ngăn xếp |
+
+# 7. Gin Framework
+Gin là framework HTTP cho Go, giúp bạn viết API gọn hơn nhờ các công cụ có sẵn cho routing, JSON, kiểm tra dữ liệu và middleware. Nó hoạt động trên nền net/http
+
+## 7.1. Gin giúp gì so với net/http?
+| Công việc | Với `net/http` | Với Gin |
+|---|---|---|
+| Viết handler | Nhận `w` và `r` | Nhận `c *gin.Context` |
+| Đăng ký route GET | `mux.HandleFunc("GET /users/{id}", handler)` | `router.GET("/users/:id", handler)` |
+| Đọc ID trên URL | `r.PathValue("id")` | `c.Param("id")` |
+| Đọc query string | `r.URL.Query().Get("name")` | `c.Query("name")` |
+| Trả JSON | Đặt header, encode, ghi response | `c.JSON(status, data)` |
+| Đọc JSON request | Dùng decoder | `c.ShouldBindJSON(&input)` |
+| Nhóm route | Tự tổ chức | `router.Group("/api")` |
+
+
+## 7.2. Cài và chạy một API đầu tiên
+```
+go mod init example.com/myapi
+go get github.com/gin-gonic/gin
+```
+
+```
+package main
+
+import (
+	"log"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	router := gin.Default()
+	router.GET("/welcome", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Welcome to Golang Course",
+		})
+	})
+	log.Fatal(router.Run(":8080"))
+}
+```
+
+gin.Default() tạo router kèm Logger để ghi thông tin request và Recovery để xử lý panic (Panic trong Go là một cơ chế dừng luồng thực thi thông thường của chương trình khi xảy ra lỗi nghiêm trọng.) trong chuỗi handler.
+gin.New() tạo router không kèm hai middleware này.
+router.Run khởi động server.
+
+## 7.3. gin.Context và gin.H là gì?
+c *gin.Context là đối tượng hỗ trợ xử lý request hiện tại: đọc đầu vào, ghi response và trao đổi dữ liệu giữa các middleware. Bạn vẫn truy cập request gốc qua c.Request và response writer qua c.Writer.
+gin.H là kiểu map được Gin định nghĩa tương đương map[string]any. Vì vậy, nó chứa được nhiều kiểu giá trị.
+c.JSON(200, data) đặt status, đặt Content-Type JSON và chuyển data thành JSON để gửi về. Bạn cũng có thể truyền struct thay vì gin.H
+
+## 7.4.Routing và đọc dữ liệu
+Gin cung cấp GET, POST, PUT, PATCH, DELETE để đăng ký handler theo HTTP method. Route /users/:id nhận ID bằng c.Param("id")
+
+| Nguồn dữ liệu | Cách đọc |
+|---|---|
+| Path `/users/123` | `c.Param("id")` |
+| Query `?page=2` | `c.Query("page")` |
+| Query có giá trị mặc định | `c.DefaultQuery("page", "1")` |
+| Header | `c.GetHeader("Authorization")` |
+| Form | `c.PostForm("name")` |
+| JSON body | `c.ShouldBindJSON(&input)` |
+
+## 7.5. Binding và validation
+Binding chuyển dữ liệu request vào struct; validation kiểm tra dữ liệu đó theo quy tắc:
+```
+type CreateUserInput struct {
+	Name  string `json:"name" binding:"required"`
+	Email string `json:"email" binding:"required,email"`
+}
+```
+
+## 7.6. Middleware và nhóm route
+Middleware thực hiện việc dùng chung như ghi log, xác thực hoặc đo thời gian. Đăng ký bằng router.Use(...), áp dụng cho nhóm bằng group.Use(...), hoặc truyền trực tiếp vào một route.
+c.Next() chạy phần tiếp theo của chuỗi rồi quay lại. c.Abort() ngăn các handler tiếp theo, nhưng không kết thúc hàm hiện tại, nên thường cần thêm return.
+api := router.Group("/api/v1") giúp các route như api.GET("/users", handler) có đường dẫn /api/v1/users, đồng thời dùng chung middleware.
+
+## 7.6. Middleware và nhóm route
+Database và tổ chức code: thường tách handler → service xử lý nghiệp vụ → repository truy cập database; Gin không bắt buộc cấu trúc này.
+Xác thực: tích hợp kiểm tra token/session bằng middleware; tự xây dựng quy tắc phân quyền.
+Tính năng khác: Gin hỗ trợ form, upload file, cookie, redirect, HTML và static files. Danh mục chức năng
+Testing: dùng net/http/httptest để gửi request vào router và kiểm tra status/body. Testing
+Triển khai: cấu hình timeout bằng http.Server, graceful shutdown và trusted proxies khi đứng sau reverse proxy.
